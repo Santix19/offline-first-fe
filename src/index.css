@@ -1,0 +1,347 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@theme inline {
+  --color-*: initial;
+  --color-field: var(--color-field);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-card-hover: var(--color-card-hover);
+  --color-surface-recessed: var(--color-surface-recessed);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-ink-body: var(--color-ink-body);
+  --color-ink-emphasis: var(--color-ink-emphasis);
+  --color-hairline: var(--color-hairline);
+  --color-rule: var(--color-rule);
+  --color-cta: var(--color-cta);
+  --color-on-cta: var(--color-on-cta);
+  --color-nav: var(--color-nav);
+  --color-on-nav: var(--color-on-nav);
+  --color-on-nav-muted: var(--color-on-nav-muted);
+  --color-brand: var(--color-brand);
+  --color-cta-hover: var(--color-cta-hover);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-fish: var(--color-fish);
+  --color-nav-raised: var(--color-nav-raised);
+  --color-nav-accent: var(--color-nav-accent);
+  --color-liquid-abyss: var(--color-liquid-abyss);
+  --color-liquid-deep: var(--color-liquid-deep);
+  --color-liquid-kelp: var(--color-liquid-kelp);
+  --color-liquid-mist: var(--color-liquid-mist);
+  --color-platinum: var(--color-platinum);
+  --color-silver-mist: var(--color-silver-mist);
+  --color-lavender-phosphor: var(--color-lavender-phosphor);
+  --color-stat: var(--color-stat);
+  --color-ok-fg: var(--status-ok-fg);
+  --color-advertencia-fg: var(--status-advertencia-fg);
+  --color-critico-fg: var(--status-critico-fg);
+  --color-info: var(--status-info);
+  --color-info-fg: var(--status-info-fg);
+  --color-info-tint: var(--status-info-tint);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-series-5: var(--series-5);
+  --color-ok: var(--status-ok);
+  --color-advertencia: var(--status-advertencia);
+  --color-critico: var(--status-critico);
+  --color-ok-tint: var(--status-ok-tint);
+  --color-advertencia-tint: var(--status-advertencia-tint);
+  --color-critico-tint: var(--status-critico-tint);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+
+  --font-display: var(--font-display);
+  --font-text: var(--font-text);
+  --font-mono: var(--font-mono);
+
+  --text-*: initial;
+  --text-title: var(--text-title);
+  --text-stat: var(--text-stat);
+  --text-heading: var(--text-heading);
+  --text-body: var(--text-body);
+  --text-label: var(--text-label);
+  --text-ui: var(--text-ui);
+  --text-caption: var(--text-caption);
+
+  --radius-*: initial;
+  --radius-sm: var(--radius-small);
+  --radius-md: var(--radius-cards);
+  --radius-lg: var(--radius-cards);
+  --radius-full: var(--radius-pill);
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+  --ease-fluid: var(--ease-fluid);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-lift: var(--shadow-lift);
+  --shadow-overlay: var(--shadow-overlay);
+  --ease-in: var(--ease-in);
+}
+
+@layer base {
+  html {
+    background: var(--color-field);
+    color: var(--color-ink-body);
+    font-family: var(--font-text);
+    font-size: 100%;
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* The WebGL lake paints behind the panel: no opaque page fills on wrappers.
+     Cards keep their own surfaces, the document background stays as the fallback. */
+  body {
+    background: transparent;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-size: var(--text-title);
+    letter-spacing: var(--tracking-title);
+    line-height: var(--leading-tight);
+    color: var(--color-ink);
+  }
+  h2, h3 {
+    font-family: var(--font-text);
+    font-weight: var(--weight-text-strong);
+    font-size: var(--text-subheading);
+    letter-spacing: var(--tracking-subheading);
+    line-height: var(--leading-subheading);
+    color: var(--color-ink);
+  }
+  input, select, textarea, button { font: inherit; font-size: var(--text-body); }
+  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-small); }
+  .num { font-variant-numeric: tabular-nums lining-nums; }
+  ::selection { background: var(--color-aurora); color: var(--color-on-cta); }
+}
+
+@layer components {
+  /* Label: sentence case, 14px, normal tracking, muted. Never capitalised labels. */
+  .label,
+  .eyebrow {
+    font-size: var(--text-label);
+    font-weight: var(--weight-text-strong);
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--color-ink-muted);
+    line-height: var(--leading-body);
+  }
+  /* Big figures (>= 24px): DM Sans 300 tabular, tight tracking. Never mono:
+     the mono comma sits in its own advance and opens a gap ("104 ,6"). */
+  .stat-value {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display-light);
+    font-size: min(var(--text-stat), 36cqw);
+    letter-spacing: var(--tracking-stat);
+    color: var(--color-stat);
+    font-variant-numeric: tabular-nums lining-nums;
+    /* Figure and unit are one reading: the unit never drops to a second line. */
+    white-space: nowrap;
+  }
+  /* The column a figure lives in, as a size container: a 4+ digit figure shrinks
+     with its tile (320-375px) instead of pushing "kg"/"peces" onto line two.
+     36cqw = the widest "1.234,5 kg" pair still fits its column; larger columns
+     fall back to --text-stat. Without a container cqw resolves to the viewport,
+     so figures outside tiles keep their token size. */
+  .stat-pair {
+    container-type: inline-size;
+    min-width: 0;
+  }
+  /* KPI tile: 24px of air on the 375-1440 grids. The icon chip is an affordance, not
+     information: below 360px the two-up grid leaves a 114px tile, narrower than the
+     label's longest word plus the chip, so the tile tightens to 16px and the chip steps
+     aside instead of hanging over the card edge. */
+  .kpi-tile {
+    padding: var(--space-6);
+  }
+  .kpi-tile-chip {
+    display: grid;
+  }
+  @media (max-width: 359px) {
+    .kpi-tile { padding: var(--space-4); }
+    .kpi-tile-chip { display: none; }
+  }
+  /* The unit after a reading: 0.4em of the figure, mono, muted, on the baseline.
+     Pair with a thin space (U+2009) between figure and unit. */
+  .unit {
+    font-family: var(--font-mono);
+    font-size: 0.4em;
+    font-weight: var(--weight-text);
+    letter-spacing: normal;
+    color: var(--color-ink-muted);
+    font-variant-numeric: tabular-nums;
+    vertical-align: baseline;
+  }
+  /* Chart axis ticks: mono readings at caption size, muted through --chart-axis. */
+  .chart-tick {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: normal;
+    fill: var(--chart-axis);
+  }
+  .btn-aurora {
+    background: var(--color-aurora);
+    color: var(--color-on-cta);
+    border-radius: var(--radius-buttons);
+  }
+  .btn-aurora:hover { filter: brightness(1.04); }
+  /* Editorial section head: index numeral + tracked label + display line, mask per line. */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .section-head-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  /* Section head index: a reading, so IBM Plex Mono, tabular, normal tracking. */
+  .section-head-index {
+    font-family: var(--font-mono);
+    font-size: var(--text-numeral);
+    font-weight: var(--weight-text-strong);
+    letter-spacing: normal;
+    color: var(--color-ink-muted);
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .section-head-kicker {
+    font-size: var(--text-caption);
+    font-weight: var(--weight-text);
+    letter-spacing: normal;
+    color: var(--color-ink-muted);
+  }
+  .section-head-rule {
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--color-hairline);
+    transform-origin: left center;
+  }
+  .section-head-title {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display-light);
+    font-size: var(--text-display-section);
+    line-height: var(--leading-editorial);
+    letter-spacing: var(--tracking-editorial);
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  .section-head-hero .section-head-title {
+    font-size: var(--text-display-hero);
+  }
+  .section-head-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.06em;
+  }
+  .section-head-line > span {
+    display: block;
+    will-change: transform;
+  }
+  .section-head-description {
+    max-width: 46ch;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-ink-muted);
+  }
+  /* Ponds row: the pinned horizontal track on desktop, a plain grid below. */
+  .pond-track {
+    display: flex;
+    gap: var(--space-6);
+    width: max-content;
+  }
+  .pond-track > * {
+    flex: 0 0 auto;
+    width: min(30rem, 82vw);
+  }
+}
+
+@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+/* Editorial rule draws out from the index numeral on page enter, patient glide. */
+@media (prefers-reduced-motion: no-preference) {
+  .section-head-rule { animation: rule-draw var(--dur-patient) var(--ease-patient) both; }
+}
+@keyframes rule-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.shimmer { position: relative; overflow: hidden; background-color: var(--color-surface-2); }
+.shimmer::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, var(--shimmer-sweep), transparent);
+  animation: shimmer 1.4s var(--ease-fluid) infinite;
+}
+/* Alive: photo duotone, card lift, critical pulse. All colors from tokens. */
+.hero-band { position: relative; isolation: isolate; overflow: hidden; }
+/* The ASCII lagoon is a light media layer: a token scrim between it and the type keeps the
+   white display head readable (>= 4.5:1) without hiding the water. Heaviest at the top where
+   the display head sits, thinnest at the foot where the KPI tiles carry their own surface. */
+.hero-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-liquid-abyss) 88%, transparent) 0%,
+    color-mix(in oklab, var(--color-liquid-abyss) 76%, transparent) 46%,
+    color-mix(in oklab, var(--color-liquid-abyss) 58%, transparent) 100%
+  );
+}
+/* GradientASCII night-lagoon layer: the hero's one visual (replaces stock photo). */
+.hero-ascii { position: absolute; inset: 0; z-index: -2; }
+.hero-ascii > div { width: 100%; height: 100%; }
+/* Token fallback (no WebGL): the painted lagoon is gone, so the scrim eases off to let
+   the cobalt fallback read instead of flattening it into the field. */
+.hero-band:has(.gradient-ascii-container[data-fallback='true'])::after {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-liquid-abyss) 78%, transparent) 0%,
+    color-mix(in oklab, var(--color-liquid-abyss) 64%, transparent) 100%
+  );
+}
+/* The hero title names the context; presence comes from the ASCII lagoon behind it. */
+.hero-band h1 { font-size: var(--text-title); letter-spacing: var(--tracking-title); }
+.pond-card-img { position: relative; height: 7.5rem; overflow: hidden; }
+.pond-card-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: saturate(0.5) brightness(0.9) contrast(1.05); }
+.pond-card-img::after { content: ""; position: absolute; inset: 0; background: var(--gradient-duotone-card); opacity: 0.72; }
+.card-lift { transition: background-color var(--dur-state) var(--ease-out); }
+.card-lift:hover { background-color: var(--color-card-hover); }
+.pulse-dot { width: 0.5rem; height: 0.5rem; border-radius: var(--radius-pill); background-color: var(--status-critico); animation: pulse-dot 1.6s var(--ease-in-out) infinite; }
+.login-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.login-duotone { position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in oklab, var(--color-liquid-abyss) 82%, transparent), color-mix(in oklab, var(--color-liquid-deep) 88%, transparent)); }
+/* Monopo wash: the one chromatic surface, liquid light behind the login card. */
+.wash {
+  position: absolute; inset: -12%; z-index: 0;
+  background: var(--gradient-iridescent);
+  opacity: var(--wash-opacity);
+  filter: blur(60px) saturate(1.2);
+  animation: wash-drift 14s var(--ease-patient) infinite;
+  will-change: transform;
+}
+@keyframes wash-drift {
+  0% { transform: translate3d(-6%, -3%, 0) scale(1.05) rotate(0deg); }
+  50% { transform: translate3d(6%, 4%, 0) scale(1.18) rotate(8deg); }
+  100% { transform: translate3d(-6%, -3%, 0) scale(1.05) rotate(0deg); }
+}
+/* Orbit badge: typographic punctuation, slow loop. */
+.orbit-badge { position: absolute; z-index: 10; width: 88px; height: 88px; display: grid; place-items: center; }
+.orbit-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: orbit-spin 14s linear infinite; }
+.orbit-badge text { fill: var(--color-platinum); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; }
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .wash, .orbit-badge svg { animation: none; }
+  .shimmer::after { animation: none; }
+  .pulse-dot { animation: none; }
+  .section-head-rule { animation: none; }
+  *, *::before, *::after { transition-duration: 120ms !important; }
+}
+
+.link-draw { position: relative; text-decoration: none; }
+.link-draw::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -0.1em; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: right;
+  transition: transform var(--dur-state) var(--ease-out);
+}
+.link-draw:hover::before, .link-draw:focus-visible::before { transform: scaleX(1); transform-origin: left; }

@@ -1,0 +1,211 @@
+/*
+ * La Cocha panel tokens. Source of truth for every color, size, radius and motion value.
+ * Visual v4 Midnight (2026-11-08, user-directed): deep blue-black stack, ice-white
+ * text, bright accents. SUPERSEDES the v3 Auros teal; the green is gone by request.
+ * A raw hex, px font size or cubic-bezier in a component is a bug: add or reuse a token here.
+ * Status + chart colors retuned for the dark canvas (solid fills, label contrast >= 4.5:1).
+ */
+:root {
+  /* ---- Midnight palette (blue-black + ice white + bright accents) ---- */
+  --color-liquid-abyss: #050b18;
+  --color-liquid-deep: #030711;
+  --color-liquid-kelp: #0b1526;
+  --color-liquid-mist: #eaf2ff;
+  --color-platinum: #ffffff;
+  --color-silver-mist: #c3d0e5;
+  --color-ash: #f2f5fb;
+  --color-slate-deep: #3a4a68;
+  --color-lavender-phosphor: #9be7ff;
+  --color-bioluminescent: #1e6bff;
+  --gradient-bioluminescent: linear-gradient(90deg, #1e6bff 0%, #7dd7ff 100%);
+  --color-aurora: #7dd7ff;
+  --color-arrow-fill: rgba(30, 107, 255, 0.28);
+
+  /* ---- Monopo Saigon layer (2026-11-08, user-directed): monochrome discipline,
+     75px pills for buttons/tags, one iridescent wash reserved for the Entrar
+     backdrop (media only, never UI fills), patient expo glides. Cards keep
+     their 16px work-tool surfaces; status solids and chart series untouched. */
+  /* v5 Cobalt (2026-11-08, user-directed: "hate that yellow"): the wash and the
+     shaders run black -> cobalt -> electric -> ice white. No warm hue anywhere
+     outside the warning status. Shader constants mirror these four stops. */
+  --wash-black: #02040b;
+  --wash-cobalt: #0b2a8f;
+  --wash-electric: #2f6bff;
+  --wash-ice: #e8f0ff;
+  --gradient-iridescent: linear-gradient(115deg, var(--wash-black) 0%, var(--wash-cobalt) 38%, var(--wash-electric) 70%, var(--wash-ice) 100%);
+  --wash-opacity: 0.55;
+  --ease-patient: cubic-bezier(0.19, 1, 0.22, 1);
+  --dur-patient: 1100ms;
+
+  /* ---- Semantic roles (components use these) ---- */
+  --color-field: var(--color-liquid-abyss);
+  --color-surface: var(--color-liquid-kelp);
+  --color-surface-2: #12203a;
+  --color-surface-recessed: var(--color-liquid-deep);
+  --color-ink: var(--color-platinum);
+  --color-ink-body: var(--color-silver-mist);
+  --color-ink-muted: var(--color-silver-mist);
+  /* Fourth text role merged into muted: three roles (ink / muted / emphasis). */
+  --color-ink-faint: var(--color-ink-muted);
+  --color-ink-emphasis: var(--color-liquid-mist);
+  --color-brand: var(--color-liquid-mist);
+  --color-hairline: rgba(255, 255, 255, 0.1);
+  --color-rule: var(--color-slate-deep);
+  --color-cta: var(--color-aurora);
+  --color-cta-hover: var(--color-liquid-mist);
+  --color-on-cta: #0a1a33;
+  --color-accent-soft: var(--color-arrow-fill);
+  --color-fish: var(--color-aurora);
+  --color-nav: var(--color-liquid-deep);
+  --color-nav-raised: var(--color-liquid-kelp);
+  --color-on-nav: var(--color-platinum);
+  --color-on-nav-muted: var(--color-silver-mist);
+  --color-nav-accent: var(--color-aurora);
+  --color-focus: var(--color-aurora);
+  --color-stat: var(--color-lavender-phosphor);
+
+  /* Legacy aliases (same names as v2 so existing classes keep working) */
+  --lago-hondo: var(--color-liquid-deep);
+  --lago: var(--color-liquid-kelp);
+  --lago-2: var(--color-liquid-kelp);
+  --aguamarina: #38e1ff;
+  --aguamarina-hover: #6ff0ff;
+  --aguamarina-soft: var(--color-arrow-fill);
+  --trucha: var(--color-fish);
+  --niebla: var(--color-liquid-abyss);
+  --papel: var(--color-liquid-kelp);
+  --papel-2: var(--color-surface-2);
+  --orilla: var(--color-hairline);
+  --orilla-fuerte: var(--color-slate-deep);
+  --tinta: var(--color-platinum);
+  --tinta-2: var(--color-silver-mist);
+  --tinta-3: var(--color-ink-faint);
+  --junco: var(--color-silver-mist);
+  --piedra: var(--color-silver-mist);
+  --agua-fria: var(--color-silver-mist);
+
+  /* ---- Status: solid fills retuned for dark, always icon + word ---- */
+  --status-ok: #eaf2ff;            --status-ok-fg: #0a1a33;            --status-ok-tint: rgba(125, 215, 255, 0.12);
+  --status-advertencia: #ffb02e; --status-advertencia-fg: #3a2400; --status-advertencia-tint: #4a3405;
+  --status-critico: #ff5a5a;     --status-critico-fg: #ffffff;     --status-critico-tint: #521114;
+  --status-info: #6ea8e8;        --status-info-fg: #0a1c33;        --status-info-tint: #16293f;
+
+  /* ---- Charts: categorical, fixed order, bright on dark ---- */
+  --series-1: #4d8dff;
+  --series-2: #ffffff;
+  --series-3: #7dd7ff;
+  --series-4: #8fa0bd;
+  --series-5: #a5b8ff;
+  --chart-band-optimo: color-mix(in oklab, var(--series-1) 14%, transparent);
+  --chart-fill: color-mix(in oklab, var(--series-1) 22%, transparent);
+  --chart-line-critico: var(--status-critico);
+  --chart-grid: rgba(255, 255, 255, 0.1);
+  --chart-axis: var(--color-silver-mist);
+
+  /* ---- Elevation: none. Depth comes from the teal stack, never shadows ---- */
+  --shadow-sm: none;
+  --shadow-lift: none;
+  --shadow-overlay: none;
+
+  /* ---- Type: DM Sans (Matter substitute) 400/500 only ---- */
+  --font-matter: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-arial: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-matter);
+  --font-text: var(--font-matter);
+  /* v5 type (2026-11-08): the panel reads like a lake instrument at night.
+     IBM Plex Mono carries every reading: figures, units, index numerals, timestamps.
+     Labels are sentence case, never uppercase-tracked. */
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --weight-display: 500;
+  --weight-text: 400;
+  --weight-text-strong: 500;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  --text-caption: 0.8125rem;
+  --text-label: 0.875rem;
+  --text-stat-label: 0.8125rem;
+  --text-ui: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: 1.25rem;
+  --text-subheading: 1.5rem;
+  --text-heading: 2.25rem;
+  --text-title: clamp(2.5rem, 3vw + 1rem, 3.8rem);
+  --text-heading-lg: 3.8125rem;
+  --text-display: 6rem;
+  /* Editorial scroll layer (2026-11-08): section heads carry the page, index
+     numerals label the sequence in 11px, DM Sans 300 for display only. */
+  --text-display-hero: clamp(3.25rem, 6.5vw, 6.5rem);
+  --text-display-section: clamp(2.25rem, 4.2vw, 4rem);
+  --text-numeral: 0.6875rem;
+  --weight-display-light: 300;
+  --leading-editorial: 0.94;
+  --tracking-editorial: -0.025em;
+  --tracking-numeral: 0.22em;
+  --text-stat: clamp(2.25rem, 3vw, 3rem);
+  --leading-display: 1;
+  --leading-heading: 1;
+  --leading-subheading: 1.3;
+  --leading-tight: 1;
+  --leading-body: 1.4;
+  --leading-ui: 1.5;
+  --leading-button: 1.43;
+  --tracking-caption: 0.15em;
+  --tracking-label: 0.12em;
+  --tracking-label-lg: 0.08em;
+  --tracking-stat: -0.04em;
+  --tracking-subheading: -0.02em;
+  --tracking-display: -0.025em;
+  --tracking-heading-lg: -2.44px;
+  --tracking-kinetic: -0.046em;
+  --tracking-title: -0.025em;
+
+  /* ---- Space (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --sidebar-width: 15rem;
+  --content-max: 90rem;
+  --page-max-width: 1440px;
+  --section-gap: 68px;
+  --element-gap: 20px;
+
+  /* ---- Shape: Monopo vocabulary. 75px pills for buttons/tags ONLY;
+     cards, inputs, sheets keep their work-tool radii. No intermediate radii. ---- */
+  --radius: 16px;
+  --radius-cards: 16px;
+  --radius-control: 6px;
+  --radius-small: 6px;
+  --radius-buttons: 75px;
+  --radius-pill: 999px;
+  --hairline: 1px;
+  --target-min: 44px;
+  --button-height: 3rem;
+
+  /* ---- Alive imagery: duotone + photo treatments (Auros teal, no new hues) ---- */
+  --gradient-duotone-hero: linear-gradient(90deg, var(--color-liquid-abyss) 8%, color-mix(in oklab, var(--color-liquid-abyss) 88%, transparent) 46%, color-mix(in oklab, var(--color-liquid-kelp) 62%, transparent) 100%);
+  --gradient-duotone-card: linear-gradient(180deg, color-mix(in oklab, var(--color-liquid-kelp) 30%, transparent) 0%, var(--color-liquid-deep) 78%);
+  --color-card-hover: var(--color-surface-2);
+  --shimmer-sweep: color-mix(in oklab, var(--color-aurora) 22%, transparent);
+
+  /* ---- Motion (same system as before): one ease-out family, no bounce ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-patient: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in: cubic-bezier(0.64, 0, 0.78, 0);
+  --ease-in-out: var(--ease-fluid);
+  --dur-micro: 120ms;
+  --dur-state: 220ms;
+  --dur-panel: 420ms;
+  --dur-reveal: 640ms;
+  --dur-patient: 1100ms;
+  --dur-feedback: var(--dur-micro);
+  --dur-exit: 250ms;
+  --press-scale: 0.97;
+}

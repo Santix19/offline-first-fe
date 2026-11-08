@@ -1,0 +1,31 @@
+.gradient-ascii-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* No WebGL2 (or a context lost past the retry budget): the hero still reads as the
+   night lagoon, from tokens. A blank grey plate is the one thing this must never be. */
+.gradient-ascii-container[data-fallback='true'] {
+  background:
+    radial-gradient(
+      130% 120% at 50% 0%,
+      color-mix(in oklab, var(--wash-electric) 58%, transparent) 0%,
+      color-mix(in oklab, var(--wash-cobalt) 45%, transparent) 46%,
+      transparent 78%
+    ),
+    linear-gradient(180deg, var(--color-liquid-deep) 0%, var(--color-liquid-kelp) 62%, var(--wash-black) 100%);
+}
+
+.gradient-ascii-container[data-fallback='true'] .gradient-ascii-canvas {
+  display: none;
+}
+
+.gradient-ascii-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
