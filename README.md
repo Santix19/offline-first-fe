@@ -155,3 +155,4 @@ spinner.
 Working in mock mode end to end: login → Inicio → pond → batch → attend an alert. `pnpm build`,
 `pnpm typecheck` and `pnpm lint` are clean (lint currently reports warnings only). Automated
 end-to-end tests are not written yet; the `docs/e2e/` screenshots were captured by hand.
+ 
